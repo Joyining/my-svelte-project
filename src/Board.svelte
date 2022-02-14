@@ -21,5 +21,4 @@
         border: 2px solid #b7c1c7;
         margin: 2px;
     }
-
 </style>
