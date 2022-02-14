@@ -1,6 +1,7 @@
 <script>
-    import { userAnswer, hint, answer } from './store'
+    import { userAnswer, userAnswers, numberOfGuess, hint, answer } from './store'
     import { VALID_GUESSES } from './constants/validGuesses'
+    import { CORRECT, WRONG_POSITION, WRONG } from './constants/validationTypes'
     export let char;
     export let variant = '';
 
@@ -13,20 +14,26 @@
         } else if (char === 'Back') {
             if($userAnswer.length === 0) return
             userAnswer.update(a => a.substring(0, a.length - 1))
+            userAnswers.update(a => {
+                const temp = $userAnswers
+                temp[$numberOfGuess] = $userAnswer
+                return temp
+            })
             console.log($userAnswer)
         } else {
             if($userAnswer.length === 5) return
             userAnswer.update(a => a += char)
+            userAnswers.update(a => {
+                const temp = $userAnswers
+                temp[$numberOfGuess] = $userAnswer
+                return temp
+            })
             console.log($userAnswer)
         }
     }
 
     const validateAnswer = (a) => {
         console.log(a)
-        if(a === $answer) {
-            console.log('Good Job!!')
-            return
-        }
         if(VALID_GUESSES.indexOf(a) < 0) {
             console.log('Not In Word List!!')
             return
@@ -35,14 +42,24 @@
         for (var i = 0; i < a.length; i++) {
             console.log(a[i]);
             if(a[i] === $answer[i]) {
-                localHint.push(0)
+                localHint.push(CORRECT)
             } else if ($answer.indexOf(a[i]) >= 0) {
-                localHint.push(1)
+                localHint.push(WRONG_POSITION)
             } else {
-                localHint.push(2)
+                localHint.push(WRONG)
             }
         }
-        hint.set(localHint)
+        hint.update(a => {
+            const temp = $hint
+            temp[$numberOfGuess] = localHint
+            return temp
+        })
+        if(a === $answer) {
+            console.log('Good Job!!')
+            return
+        }
+        userAnswer.set('')
+        numberOfGuess.update(a => a += 1) 
         console.log($hint)
     }
 </script>
