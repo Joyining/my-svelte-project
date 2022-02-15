@@ -4,8 +4,7 @@
     import { CORRECT, WRONG_POSITION, WRONG } from './constants/validationTypes'
     export let char;
     export let variant = '';
-
-    console.log($answer)
+    export let validation = '';
 
     const handleOnClick = (char)=> {
         if(char === 'Enter') {
@@ -40,7 +39,6 @@
         }
         const localHint = []
         for (var i = 0; i < a.length; i++) {
-            console.log(a[i]);
             if(a[i] === $answer[i]) {
                 localHint.push(CORRECT)
             } else if ($answer.indexOf(a[i]) >= 0) {
@@ -64,7 +62,7 @@
     }
 </script>
 
-<button class={variant} on:click={handleOnClick(char)}>{char}</button>
+<button class={`${variant} ${validation}`} on:click={handleOnClick(char)}>{char}</button>
 
 <style>
     .large {
@@ -74,5 +72,15 @@
         width: 30px;
         height: 40px;
         margin: 2px;
+    }
+
+    .correct {
+        background-color:#43ba48 ;
+    }
+    .wrong-position {
+        background-color:#e99920 ;
+    }
+    .wrong {
+        background-color: #6c7e87;
     }
 </style>

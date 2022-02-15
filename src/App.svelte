@@ -1,7 +1,10 @@
 <script>
+	import { answer } from './store'
 	import Header from './Header.svelte'
 	import Board from './Board.svelte'
 	import Keyboard from './Keyboard.svelte'
+
+	console.log($answer)
 </script>
 
 <main>

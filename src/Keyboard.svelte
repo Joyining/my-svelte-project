@@ -1,26 +1,77 @@
 <script>
     import Key from './Key.svelte'
-    const row0 = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
-    const row1 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
-    const row2 = ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+    import { userAnswers, hint } from './store'
+    let keys = [
+        {
+            Q: '',
+            W: '',
+            E: '',
+            R: '',
+            T: '',
+            Y: '',
+            U: '',
+            I: '',
+            O: '',
+            P: ''
+        },
+        {
+            A: '',
+            S: '',
+            D: '',
+            F: '',
+            G: '',
+            H: '',
+            J: '',
+            K: '',
+            L: ''
+        },
+        {
+            Z: '',
+            X: '',
+            C: '',
+            V: '',
+            B: '',
+            N: '',
+            M: ''
+        }
+    ]
+
+    hint.subscribe(value => {
+        const latestUserAnswer = $userAnswers[$userAnswers.length - 1]
+        const latestHint = value[value.length - 1]
+        for (var i = 0; i < latestUserAnswer?.length; i++) {
+            if(latestUserAnswer[i] in keys[0]) {
+                keys[0][latestUserAnswer[i]] = latestHint[i]
+                continue
+            }
+            if(latestUserAnswer[i] in keys[1]) {
+                keys[1][latestUserAnswer[i]] = latestHint[i]
+                continue
+            }
+            if(latestUserAnswer[i] in keys[2]) {
+                keys[2][latestUserAnswer[i]] = latestHint[i]
+            }
+        } 
+    })
+
 </script>
 
 <div class="wrap">
     <div class="row">
-        {#each row0 as char, i}
-            <Key char={char} />
+        {#each Object.entries(keys[0]) as [char, validation]}
+            <Key char={char} validation={validation}/>
         {/each} 
     </div>
     <div class="row">
-        {#each row1 as char, i}
-            <Key char={char} />
-        {/each}
+        {#each Object.entries(keys[1]) as [char, validation]}
+            <Key char={char} validation={validation}/>
+        {/each} 
     </div>
     <div class="row">
         <Key variant='large' char='Enter' />
-        {#each row2 as char, i}
-            <Key char={char} />
-        {/each}
+        {#each Object.entries(keys[2]) as [char, validation]}
+            <Key char={char} validation={validation}/>
+        {/each} 
         <Key variant='large' char='Back' />
     </div>
 </div>
