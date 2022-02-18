@@ -28,4 +28,13 @@
 			max-width: none;
 		}
 	}
+	:global(.correct) {
+        background-color:#43ba48 ;
+    }
+    :global(.wrong-position) {
+        background-color:#e99920 ;
+    }
+    :global(.wrong) {
+        background-color: #6c7e87;
+    }
 </style>

@@ -69,13 +69,4 @@
         height: 40px;
         margin: 2px;
     }
-    .correct {
-        background-color:#43ba48 ;
-    }
-    .wrong-position {
-        background-color:#e99920 ;
-    }
-    .wrong {
-        background-color: #6c7e87;
-    }
 </style>
