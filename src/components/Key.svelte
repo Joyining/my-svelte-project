@@ -18,7 +18,6 @@
                 temp[$numberOfGuess] = $userAnswer
                 return temp
             })
-            console.log($userAnswer)
         } else {
             if($userAnswer.length === 5) return
             userAnswer.update(a => a += char)
@@ -27,12 +26,10 @@
                 temp[$numberOfGuess] = $userAnswer
                 return temp
             })
-            console.log($userAnswer)
         }
     }
 
     const validateAnswer = (a) => {
-        console.log(a)
         if(VALID_GUESSES.indexOf(a) < 0) {
             console.log('Not In Word List!!')
             return
@@ -58,7 +55,6 @@
         }
         userAnswer.set('')
         numberOfGuess.update(a => a += 1) 
-        console.log($hint)
     }
 </script>
 

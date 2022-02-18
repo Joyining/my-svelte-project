@@ -1,9 +1,8 @@
 <script>
 	import { answer } from './store'
-	import Header from './Header.svelte'
-	import Board from './Board.svelte'
-	import Keyboard from './Keyboard.svelte'
-
+	import Header from './components/Header.svelte'
+	import Board from './components/Board.svelte'
+	import Keyboard from './components/Keyboard.svelte'
 	console.log($answer)
 </script>
 
