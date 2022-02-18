@@ -1,5 +1,5 @@
 <script>
-    import { latestGuess, guesses, numberOfGuess, validations, answer } from '../store'
+    import { latestGuess, guesses, numberOfGuess, validations, answer, snackbarMessage } from '../store'
     import { VALID_GUESSES } from '../constants/validGuesses'
     import { CORRECT, WRONG_POSITION, WRONG } from '../constants/validationTypes'
     export let char;
@@ -31,7 +31,10 @@
 
     const validateAnswer = (a) => {
         if(VALID_GUESSES.indexOf(a) < 0) {
-            console.log('Not In Word List!!')
+            snackbarMessage.set('Not In Word List!!')
+            setTimeout(()=> {
+                snackbarMessage.set('')
+            }, 2000)
             return
         }
         const localValidation = []
@@ -50,7 +53,7 @@
             return temp
         })
         if(a === $answer) {
-            console.log('Good Job!!')
+            snackbarMessage.set('Good Job!!')
             return
         }
         latestGuess.set('')
