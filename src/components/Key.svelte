@@ -1,7 +1,7 @@
 <script>
-    import { latestGuess, guesses, numberOfGuess, validations, answer } from './store'
-    import { VALID_GUESSES } from './constants/validGuesses'
-    import { CORRECT, WRONG_POSITION, WRONG } from './constants/validationTypes'
+    import { latestGuess, guesses, numberOfGuess, validations, answer } from '../store'
+    import { VALID_GUESSES } from '../constants/validGuesses'
+    import { CORRECT, WRONG_POSITION, WRONG } from '../constants/validationTypes'
     export let char;
     export let variant = '';
     export let validation = '';

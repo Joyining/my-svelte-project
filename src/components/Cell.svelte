@@ -1,5 +1,5 @@
 <script>
-    import { CORRECT, WRONG_POSITION, WRONG } from './constants/validationTypes'
+    import { CORRECT, WRONG_POSITION, WRONG } from '../constants/validationTypes'
     export let char = '';
     export let validation = '';
 </script>

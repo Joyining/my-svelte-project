@@ -1,6 +1,6 @@
 <script>
     import Cell from './Cell.svelte'
-    import { guesses, validations } from '.../store'
+    import { guesses, validations } from '../store'
 	export let maxWordLength;
     export let maxChallenges;
 </script>

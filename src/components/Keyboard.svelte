@@ -1,6 +1,6 @@
 <script>
     import Key from './Key.svelte'
-    import { guesses, validations } from './store'
+    import { guesses, validations } from '../store'
     let keys = [
         {
             Q: '',
