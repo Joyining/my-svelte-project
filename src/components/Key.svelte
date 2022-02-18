@@ -1,5 +1,5 @@
 <script>
-    import { userAnswer, userAnswers, numberOfGuess, hint, answer } from './store'
+    import { latestGuess, guesses, numberOfGuess, validations, answer } from './store'
     import { VALID_GUESSES } from './constants/validGuesses'
     import { CORRECT, WRONG_POSITION, WRONG } from './constants/validationTypes'
     export let char;
@@ -8,22 +8,22 @@
 
     const handleOnClick = (char)=> {
         if(char === 'Enter') {
-            if($userAnswer.length < 5) return
-            validateAnswer($userAnswer.toLowerCase())
+            if($latestGuess.length < 5) return
+            validateAnswer($latestGuess.toLowerCase())
         } else if (char === 'Back') {
-            if($userAnswer.length === 0) return
-            userAnswer.update(a => a.substring(0, a.length - 1))
-            userAnswers.update(a => {
-                const temp = $userAnswers
-                temp[$numberOfGuess] = $userAnswer
+            if($latestGuess.length === 0) return
+            latestGuess.update(a => a.substring(0, a.length - 1))
+            guesses.update(a => {
+                const temp = $guesses
+                temp[$numberOfGuess] = $latestGuess
                 return temp
             })
         } else {
-            if($userAnswer.length === 5) return
-            userAnswer.update(a => a += char)
-            userAnswers.update(a => {
-                const temp = $userAnswers
-                temp[$numberOfGuess] = $userAnswer
+            if($latestGuess.length === 5) return
+            latestGuess.update(a => a += char)
+            guesses.update(a => {
+                const temp = $guesses
+                temp[$numberOfGuess] = $latestGuess
                 return temp
             })
         }
@@ -34,26 +34,26 @@
             console.log('Not In Word List!!')
             return
         }
-        const localHint = []
+        const localValidation = []
         for (var i = 0; i < a.length; i++) {
             if(a[i] === $answer[i]) {
-                localHint.push(CORRECT)
+                localValidation.push(CORRECT)
             } else if ($answer.indexOf(a[i]) >= 0) {
-                localHint.push(WRONG_POSITION)
+                localValidation.push(WRONG_POSITION)
             } else {
-                localHint.push(WRONG)
+                localValidation.push(WRONG)
             }
         }
-        hint.update(a => {
-            const temp = $hint
-            temp[$numberOfGuess] = localHint
+        validations.update(a => {
+            const temp = $validations
+            temp[$numberOfGuess] = localValidation
             return temp
         })
         if(a === $answer) {
             console.log('Good Job!!')
             return
         }
-        userAnswer.set('')
+        latestGuess.set('')
         numberOfGuess.update(a => a += 1) 
     }
 </script>
@@ -69,7 +69,6 @@
         height: 40px;
         margin: 2px;
     }
-
     .correct {
         background-color:#43ba48 ;
     }

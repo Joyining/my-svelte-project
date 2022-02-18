@@ -1,6 +1,6 @@
 <script>
     import Key from './Key.svelte'
-    import { userAnswers, hint } from './store'
+    import { guesses, validations } from './store'
     let keys = [
         {
             Q: '',
@@ -36,8 +36,8 @@
         }
     ]
 
-    hint.subscribe(value => {
-        const latestUserAnswer = $userAnswers[$userAnswers.length - 1]
+    validations.subscribe(value => {
+        const latestUserAnswer = $guesses[$guesses.length - 1]
         const latestHint = value[value.length - 1]
         for (var i = 0; i < latestUserAnswer?.length; i++) {
             if(latestUserAnswer[i] in keys[0]) {
